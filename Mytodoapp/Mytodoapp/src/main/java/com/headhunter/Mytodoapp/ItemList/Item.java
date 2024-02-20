@@ -3,10 +3,15 @@ package com.headhunter.Mytodoapp.ItemList;
 import java.time.LocalDate;
 import java.time.Period;
 
+import com.headhunter.Mytodoapp.User.User;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -14,15 +19,24 @@ import jakarta.persistence.Transient;
 @Entity
 @Table
 public class Item {
+
     @Id
     @SequenceGenerator(name = "item_sequence", sequenceName = "item_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_sequence")
     private Long id;
+
+    @Column(nullable = false)
     private String text;
+
     private boolean done;
     private LocalDate deadline;
+
     @Transient
     private int remainingDays;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public int getRemainingDays() {
         return Period.between(LocalDate.now(), this.deadline).getDays();

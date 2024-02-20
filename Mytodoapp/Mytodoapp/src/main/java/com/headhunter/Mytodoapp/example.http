@@ -2,7 +2,7 @@ POST http://localhost:8080/api/v1/item
 Content-Type: application/json
 
 {
-    "text": "fuck",
+    "text": "cook",
     "done": true,
     "deadline": "2024-02-20"
 }
