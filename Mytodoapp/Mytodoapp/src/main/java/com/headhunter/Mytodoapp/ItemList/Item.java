@@ -38,6 +38,14 @@ public class Item {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public int getRemainingDays() {
         return Period.between(LocalDate.now(), this.deadline).getDays();
     }
@@ -85,19 +93,23 @@ public class Item {
     public Item(Long id,
             String text,
             boolean done,
-            LocalDate deadline) {
+            LocalDate deadline,
+            User user) {
         this.id = id;
         this.text = text;
         this.done = done;
         this.deadline = deadline;
+        this.user = user;
     }
 
     public Item(String text,
             boolean done,
-            LocalDate deadline) {
+            LocalDate deadline,
+            User user) {
         this.text = text;
         this.done = done;
         this.deadline = deadline;
+        this.user = user;
     }
 
     @Override

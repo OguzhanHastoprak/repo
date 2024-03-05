@@ -1,10 +1,15 @@
 package com.headhunter.Mytodoapp.ItemList;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Service;
+
+import com.headhunter.Mytodoapp.User.User;
+import com.headhunter.Mytodoapp.User.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -12,18 +17,54 @@ import jakarta.transaction.Transactional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    public ItemService(ItemRepository itemRepository) {
+    public ItemService(ItemRepository itemRepository, UserRepository userRepository) {
         this.itemRepository = itemRepository;
+        this.userRepository = userRepository;
+    }
+
+    // deneme
+    @PostAuthorize("returnObject.user.id==authentication.principal.id")
+    public Item findItem(Long requestedId) {
+        Optional<Item> optionalItem = itemRepository.findById(requestedId);
+        if (optionalItem.isPresent())
+            return optionalItem.get();
+        else
+            throw new IllegalStateException("Item not found");
+    }
+
+    public Item findById(Long requestedId, Principal principal) {
+        Optional<User> currentUser = userRepository.findByUserName(principal.getName());
+        if (currentUser.isPresent()) {
+            int userId = findUserIdByUsername(principal.getName());
+            return itemRepository.findByIdAndUserId(requestedId, userId);
+        } else
+            throw new IllegalStateException("Current user not found");
+    }
+
+    public int findUserIdByUsername(String userName) {
+        Optional<User> userOptional = userRepository.findByUserName(userName);
+        return userOptional.map(User::getId).orElse(null);
     }
 
     public List<Item> getItems() {
         return itemRepository.findAll();
     }
 
-    public void addNewItem(Item item) {
-        itemRepository.save(item);
+    @Transactional
+    public Item addNewItem(Item newItemRequest, Principal principal) {
+        Optional<User> currentUser = userRepository.findByUserName(principal.getName());
+        if (currentUser.isPresent())
+            newItemRequest.setUser(currentUser.get());
+        else
+            throw new IllegalStateException("Current user not found");
+        Item itemWithUser = new Item(newItemRequest.getText(),
+                newItemRequest.isDone(),
+                newItemRequest.getDeadline(),
+                newItemRequest.getUser());
+        itemRepository.save(itemWithUser);
+        return itemWithUser;
     }
 
     public void deleteTask(Long id) {

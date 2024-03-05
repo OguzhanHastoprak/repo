@@ -1,4 +1,5 @@
 POST http://localhost:8080/api/v1/item
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
 Content-Type: application/json
 
 {
@@ -10,11 +11,23 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/v1/item/1
+GET http://localhost:8080/api/v1/item
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+
+
+
+###
+GET http://localhost:8080/api/v1/item/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
 
 ###
 
-PUT http://localhost:8080/api/v1/item/1?text=suck
+DELETE http://localhost:8080/api/v1/item/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+###
+
+PUT http://localhost:8080/api/v1/item/2?text=yolo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
 
 ###
 
@@ -22,7 +35,7 @@ POST http://localhost:8080/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "userName": "Oguzhan",
+    "userName": "Whatever",
     "password": "123456"
 }
 
@@ -31,6 +44,6 @@ POST http://localhost:8080/api/v1/auth/authenticate
 Content-Type: application/json
 
 {
-    "userName": "Oguzhan",
+    "userName": "Whatever",
     "password": "123456"
 }
