@@ -1,33 +1,41 @@
 POST http://localhost:8080/api/v1/item
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTk1MTU4NywiZXhwIjoxNzA5OTUzMDI3fQ.e-bmmSSI3vFlcyc8VeU1m8V0PivEASPk2AgAIf7T3jU
 Content-Type: application/json
 
 {
-    "text": "cook",
+    "text": "eat",
     "done": true,
-    "deadline": "2024-02-20"
+    "deadline": "2024-03-20"
 }
 
 
 ###
 
 GET http://localhost:8080/api/v1/item
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzA5OTUxNjc1LCJleHAiOjE3MDk5NTMxMTV9.7-Gfxf8_nEHN8m10sv8CN36yTAaiN17OsXQ1IGP2XCU
 
 
 
 ###
-GET http://localhost:8080/api/v1/item/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+GET http://localhost:8080/api/v1/item/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzA5OTUxNjc1LCJleHAiOjE3MDk5NTMxMTV9.7-Gfxf8_nEHN8m10sv8CN36yTAaiN17OsXQ1IGP2XCU
 
 ###
 
-DELETE http://localhost:8080/api/v1/item/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+DELETE http://localhost:8080/api/v1/item/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzA5OTUxNjc1LCJleHAiOjE3MDk5NTMxMTV9.7-Gfxf8_nEHN8m10sv8CN36yTAaiN17OsXQ1IGP2XCU
+
 ###
 
-PUT http://localhost:8080/api/v1/item/2?text=yolo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJXaGF0ZXZlciIsImlhdCI6MTcwOTYzODI2OSwiZXhwIjoxNzA5NjM5NzA5fQ.yZrVIX6fEpKEfWkqDrI5FuKXxoSVdo9MGlpFIwZVJc4
+PUT http://localhost:8080/api/v1/item/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzA5OTUxNjc1LCJleHAiOjE3MDk5NTMxMTV9.7-Gfxf8_nEHN8m10sv8CN36yTAaiN17OsXQ1IGP2XCU
+Content-Type: application/json
+
+{
+    "text": "notmine",
+    "done": true,
+    "deadline": "2024-03-20"
+}
 
 ###
 
@@ -35,7 +43,7 @@ POST http://localhost:8080/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "userName": "Whatever",
+    "userName": "Oguzhan",
     "password": "123456"
 }
 

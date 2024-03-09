@@ -20,13 +20,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping(path = "api/v1/item")
-@PreAuthorize("hasRole('USER')")
+//@PreAuthorize("hasRole('USER')")
 public class ItemController {
 
     private final ItemService itemService;
 
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
+
     }
 
     @GetMapping
@@ -79,9 +80,7 @@ public class ItemController {
     }
 
     @PutMapping(path = "{id}")
-    public void updateTask(@PathVariable("id") Long id,
-            @RequestParam(required = false) String text,
-            @RequestParam(required = false) boolean done) {
-        itemService.updateItem(id, text, done);
+    public void updateTask(@PathVariable("id") Long id, @RequestBody Item item, Principal principal) {
+        itemService.updateItem(id, item, principal);
     }
 }

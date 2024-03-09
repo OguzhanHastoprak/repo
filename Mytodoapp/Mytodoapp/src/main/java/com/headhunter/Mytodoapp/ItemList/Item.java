@@ -3,6 +3,7 @@ package com.headhunter.Mytodoapp.ItemList;
 import java.time.LocalDate;
 import java.time.Period;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.headhunter.Mytodoapp.User.User;
 
 import jakarta.persistence.Column;
@@ -36,6 +37,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     public User getUser() {

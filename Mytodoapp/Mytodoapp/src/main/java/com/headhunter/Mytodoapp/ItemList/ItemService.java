@@ -6,6 +6,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.headhunter.Mytodoapp.User.User;
@@ -16,6 +21,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class ItemService {
 
+
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
 
@@ -25,7 +31,7 @@ public class ItemService {
     }
 
     // deneme
-    @PostAuthorize("returnObject.user.id==authentication.principal.id")
+    @PostAuthorize("returnObject.user.id == authentication.principal.id")
     public Item findItem(Long requestedId) {
         Optional<Item> optionalItem = itemRepository.findById(requestedId);
         if (optionalItem.isPresent())
@@ -48,8 +54,16 @@ public class ItemService {
         return userOptional.map(User::getId).orElse(null);
     }
 
+    //@PostFilter("filterObject.user.id == authentication.principal.id")
     public List<Item> getItems() {
-        return itemRepository.findAll();
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        String user = authentication.getName();
+        Optional<User> userId = userRepository.findByUserName(user);
+        if (userId.isPresent())
+            return itemRepository.findByUserId(userId.get().getId());
+        else
+            throw new IllegalStateException("Current user not found");
     }
 
     @Transactional
@@ -67,24 +81,28 @@ public class ItemService {
         return itemWithUser;
     }
 
+    //@PreAuthorize("#id")
     public void deleteTask(Long id) {
-        boolean exists = itemRepository.existsById(id);
-        if (!exists) {
-            throw new IllegalStateException("id does not exist");
-        }
-        itemRepository.deleteById(id);
+        Optional<Item> item = itemRepository.findById(id);
+        if (item.isPresent()) {
+            SecurityContext context = SecurityContextHolder.getContext();
+            Authentication authentication = context.getAuthentication();
+            String user = authentication.getName();
+            Optional<User> userId = userRepository.findByUserName(user);
+            if (userId.isPresent()) {
+                if (Objects.equals(item.get().getUser().getId(), userId.get().getId()))
+                    itemRepository.deleteById(id);
+                else throw new IllegalStateException("403");
+            } else throw new IllegalStateException("Current user not found");
+        } else throw new IllegalStateException("Item not found");
     }
 
     @Transactional
-    public void updateItem(Long id, String text, boolean done) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new IllegalStateException("id does not exist"));
-
-        if (text != null && text.length() > 0 && !Objects.equals(item.getText(), text)) {
-            item.setText(text);
-        }
-
-        if (!Objects.equals(item.isDone(), done)) {
-            item.setDone(done);
-        }
+    public void updateItem(Long id, Item itemUpdate, Principal principal) {
+        Item item = itemRepository.findByIdAndUserUserName(id, principal.getName());
+        if (item == null)
+            throw new IllegalStateException("item not found");
+        Item updatedItem = new Item(id, itemUpdate.getText(), itemUpdate.isDone(), itemUpdate.getDeadline(), item.getUser());
+        itemRepository.save(updatedItem);
     }
 }
