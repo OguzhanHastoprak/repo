@@ -1,4 +1,4 @@
-package com.headhunter.Mytodoapp.auth;
+package com.headhunter.Library.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class    AuthenticationResponse {
-
-    private String token;
+public class AuthenticationRequest {
+    private String userName;
+    private String password;
 }

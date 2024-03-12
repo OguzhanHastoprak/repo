@@ -30,7 +30,6 @@ public class SecurityConfig {
                             .permitAll()
                             .anyRequest()
                             .authenticated())
-                    // .requestMatchers("api/v1/item/**")
                     .sessionManagement(management -> management
                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .authenticationProvider(authenticationProvider)
