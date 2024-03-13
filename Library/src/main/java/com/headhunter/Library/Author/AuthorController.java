@@ -48,7 +48,7 @@ public class AuthorController {
 
     @DeleteMapping("/{requestedId}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long requestedId) {
-        return this.authorService.deleteAuthor() ?
+        return this.authorService.deleteAuthor(requestedId) ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.notFound().build();
     }
