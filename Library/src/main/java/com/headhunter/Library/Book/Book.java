@@ -6,12 +6,14 @@ import com.headhunter.Library.Publisher.Publisher;
 import com.headhunter.Library.User.User;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
 @Table
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -33,7 +35,20 @@ public class Book {
 
     @ManyToMany
     @JoinTable(name = "Checkout",
-    joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @JsonBackReference
     private List<User> bookOwners;
+
+    public Book(String name, Author author, Publisher publisher) {
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+    }
+
+    public Book(Long requestedId, String name, Author author, Publisher publisher) {
+        this.id = requestedId;
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+    }
 }
