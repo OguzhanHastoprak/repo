@@ -51,4 +51,8 @@ public class Book {
         this.author = author;
         this.publisher = publisher;
     }
+
+    public void addBookOwner(User user){
+        bookOwners.add(user);
+    }
 }

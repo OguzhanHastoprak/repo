@@ -46,6 +46,13 @@ public class BookController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{bookId}/user/{userId}")
+    public ResponseEntity<Void> checkedOut(@PathVariable Long bookId, @PathVariable Integer userId) {
+        return this.bookService.checkedOut(bookId, userId) ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{requestedId}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long requestedId) {
         return this.bookService.deleteBook(requestedId) ?

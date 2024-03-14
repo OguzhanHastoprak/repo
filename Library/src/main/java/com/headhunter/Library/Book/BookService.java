@@ -1,5 +1,7 @@
 package com.headhunter.Library.Book;
 
+import com.headhunter.Library.User.User;
+import com.headhunter.Library.User.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +10,11 @@ import java.util.Optional;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
+    private final UserRepository userRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Book> getBooks() {
@@ -38,6 +42,15 @@ public class BookService {
         if(!this.bookRepository.existsById(requestedId))
             return false;
         this.bookRepository.deleteById(requestedId);
+        return true;
+    }
+
+    public boolean checkedOut(Long bookId, Integer userId) {
+        Optional<Book> book = this.bookRepository.findById(bookId);
+        Optional<User> user = this.userRepository.findById(userId);
+        if (book.isEmpty() || user.isEmpty())
+            return false;
+        book.get().addBookOwner(user.get());
         return true;
     }
 }
