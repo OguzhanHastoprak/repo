@@ -1,5 +1,6 @@
 package com.headhunter.Library.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.headhunter.Library.Book.Book;
 import com.headhunter.Library.Enum.Role;
@@ -34,7 +35,7 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(mappedBy = "bookOwners")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Book> books;
 
     @Enumerated(EnumType.STRING)

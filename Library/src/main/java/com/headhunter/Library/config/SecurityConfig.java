@@ -27,10 +27,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
-                        .hasRole("USER")
-                        .requestMatchers("/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
-                        .hasRole("ADMIN")
+                        //.requestMatchers(HttpMethod.GET, "/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
+                        //.hasRole("USER")
+                        //.requestMatchers("/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
+                        //.hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(management -> management

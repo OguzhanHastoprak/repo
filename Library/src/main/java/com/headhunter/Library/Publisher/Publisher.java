@@ -22,7 +22,7 @@ public class Publisher {
     private String name;
 
     @OneToMany(mappedBy = "publisher")
-    @JsonManagedReference
+    @JsonManagedReference(value = "book-publisher")
     private List<Book> books;
 
     public Publisher(String name) {

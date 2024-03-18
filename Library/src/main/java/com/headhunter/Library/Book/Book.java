@@ -25,18 +25,17 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    @JsonBackReference
+    @JsonBackReference(value = "book-author")
     private Author author;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
-    @JsonBackReference
+    @JsonBackReference(value = "book-publisher")
     private Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "Checkout",
             joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @JsonBackReference
     private List<User> bookOwners;
 
     public Book(String name, Author author, Publisher publisher) {

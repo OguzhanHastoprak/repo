@@ -1,0 +1,62 @@
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "userName": "Oguzhan",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:8080/api/v1/auth/authenticate
+Content-Type: application/json
+
+{
+  "userName": "Oguzhan",
+  "password": "123456"
+}
+
+###
+
+GET http://localhost:8080/api/v1/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzMyNjY3LCJleHAiOjE3MTA3MzQxMDd9.heD_uZHvNp3bqBnnb8cZA0vUDNOqCNbLFoQwqh46TLU
+
+###
+
+POST http://localhost:8080/api/v1/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzMyNjY3LCJleHAiOjE3MTA3MzQxMDd9.heD_uZHvNp3bqBnnb8cZA0vUDNOqCNbLFoQwqh46TLU
+Content-Type: application/json
+
+{
+  "name": "Book B",
+  "author": {
+    "id": 1,
+    "firstName": "Author",
+    "lastName": "A"
+  },
+  "publisher": {
+    "id": 1,
+    "name": "Publisher A"
+  }
+}
+
+###
+
+POST http://localhost:8080/api/v1/author
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzMyNjY3LCJleHAiOjE3MTA3MzQxMDd9.heD_uZHvNp3bqBnnb8cZA0vUDNOqCNbLFoQwqh46TLU
+Content-Type: application/json
+
+{
+  "firstName": "Author",
+  "lastName": "A"
+}
+
+###
+
+POST http://localhost:8080/api/v1/publisher
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzMyNjY3LCJleHAiOjE3MTA3MzQxMDd9.heD_uZHvNp3bqBnnb8cZA0vUDNOqCNbLFoQwqh46TLU
+Content-Type: application/json
+
+{
+  "name": "Publisher A"
+}

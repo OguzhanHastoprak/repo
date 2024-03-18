@@ -29,6 +29,11 @@ public class BookController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/author/{requestedAuthorId}")
+    public ResponseEntity<List<Book>> findByAuthorId(@PathVariable Long requestedAuthorId){
+        return ResponseEntity.ok(this.bookService.findByAuthorId(requestedAuthorId));
+    }
+
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody BookRequest bookRequest, UriComponentsBuilder uriComponentsBuilder) {
         Book savedBook = this.bookService.createBook(bookRequest);

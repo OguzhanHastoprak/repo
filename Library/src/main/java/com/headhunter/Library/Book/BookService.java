@@ -25,6 +25,10 @@ public class BookService {
         return this.bookRepository.findById(requestedId);
     }
 
+    public List<Book> findByAuthorId(Long requestedAuthorId) {
+        return this.bookRepository.findByAuthorId(requestedAuthorId);
+    }
+
     public Book createBook(BookRequest bookRequest) {
         Book book = new Book(bookRequest.name(), bookRequest.author(), bookRequest.publisher());
         return this.bookRepository.save(book);
