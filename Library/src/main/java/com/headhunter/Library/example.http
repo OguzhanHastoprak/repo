@@ -19,7 +19,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/v1/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzMyNjY3LCJleHAiOjE3MTA3MzQxMDd9.heD_uZHvNp3bqBnnb8cZA0vUDNOqCNbLFoQwqh46TLU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwNzM0ODI1LCJleHAiOjE3MTA3MzYyNjV9.gHV7nw6_Nma6zixoVMGQ-QAsgn5mziTIEHuw0veuLGs
 
 ###
 
