@@ -30,6 +30,20 @@ public class AuthenticationService {
                 .build();
     }
 
+    //for test purposes
+    public AuthenticationResponse registerAsAdmin(RegisterRequest request) {
+        var user = User.builder()
+                .userName(request.getUserName())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.ADMIN)
+                .build();
+        userRepository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));

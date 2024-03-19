@@ -28,9 +28,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
-                        .hasAuthority("USER")
-                        //.requestMatchers("/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
-                        //.hasRole("ADMIN")
+                        .hasAnyAuthority("USER","ADMIN")
+                        .requestMatchers("/api/v1/book/**", "/api/v1/author/**", "/api/v1/publisher/**")
+                        .hasAuthority("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(management -> management

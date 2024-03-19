@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "name": "Book A",
+    "author": {
+      "id": 1,
+      "firstName": "Author",
+      "lastName": "A"
+    },
+    "publisher": {
+      "id": 1,
+      "name": "Publisher A"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Book B",
+    "author": {
+      "id": 2,
+      "firstName": "Author",
+      "lastName": "B"
+    },
+    "publisher": {
+      "id": 2,
+      "name": "Publisher B"
+    }
+  }
+]
