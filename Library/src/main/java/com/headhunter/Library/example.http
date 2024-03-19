@@ -2,7 +2,7 @@ POST http://localhost:8080/api/v1/auth/register
 Content-Type: application/json
 
 {
-  "userName": "Oguzhan",
+  "userName": "User",
   "password": "123456"
 }
 
@@ -34,11 +34,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwO
 ###
 
 POST http://localhost:8080/api/v1/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJPZ3V6aGFuIiwiaWF0IjoxNzEwODEzNjc1LCJleHAiOjE3MTA4MTUxMTV9.BJHd-yCplUM0bjyak5-I2KMPkGLFRGTsuOugqp5k1EI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIiwiaWF0IjoxNzEwODY4NTQ3LCJleHAiOjE3MTA4Njk5ODd9.DVq4fg-iDKNDtGIZtVc_htApFbNNeVizZA4A6Scaf3o
 Content-Type: application/json
 
 {
-  "name": "Book A",
+  "name": "Book D",
   "author": {
     "id": 1,
     "firstName": "Author",
