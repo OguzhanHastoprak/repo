@@ -34,7 +34,7 @@ public class BookTests {
     void shouldReturnAllBooksWhenListIsRequested() throws Exception {
         this.mvc.perform(get("/api/v1/book"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(4));
+                .andExpect(jsonPath("$.length()").value(5));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class BookTests {
     @Transactional
     @Rollback
     void shouldNotUpdateABook() throws Exception {
-        this.mvc.perform(put("api/v1/book/1")
+        this.mvc.perform(put("/api/v1/book/1")
                 .contentType("application/json")
                 .content("""
                         {
@@ -141,7 +141,7 @@ public class BookTests {
     @Rollback
     @WithMockUser(username = "Admim", authorities = "ADMIN")
     void shouldUpdateABookIfExists() throws Exception {
-        this.mvc.perform(put("api/v1/book/1")
+        this.mvc.perform(put("/api/v1/book/1")
                 .contentType("application/json")
                 .content("""
                         {
@@ -165,7 +165,7 @@ public class BookTests {
     @Transactional
     @Rollback
     void shouldNotAddOwnerToABook() throws Exception {
-        this.mvc.perform(put("api/v1/book/1/user/1"))
+        this.mvc.perform(put("/api/v1/book/1/user/1"))
                 .andExpect(status().isForbidden());
     }
 
@@ -175,7 +175,7 @@ public class BookTests {
     @Rollback
     @WithMockUser(username = "Admin", authorities = "ADMIN")
     void shouldAddOwnerToABook() throws Exception {
-        this.mvc.perform(put("api/v1/book/1/user/1"))
+        this.mvc.perform(put("/api/v1/book/1/user/1"))
                 .andExpect(status().isNoContent());
     }
 }
