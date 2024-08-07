@@ -1,7 +1,6 @@
 package com.headhunter.Library.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.headhunter.Library.Book.Book;
 import com.headhunter.Library.Enum.Role;
 import jakarta.persistence.*;

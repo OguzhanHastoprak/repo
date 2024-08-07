@@ -10,7 +10,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -25,9 +24,9 @@ public class BookTests {
 
     @Test
     void shouldReturnABookWhenDataIsSaved() throws Exception {
-        this.mvc.perform(get("/api/v1/book/1"))
+        this.mvc.perform(get("/api/v1/book/2"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1));
+                .andExpect(jsonPath("$.id").value(2));
     }
 
     @Test
@@ -47,7 +46,7 @@ public class BookTests {
                         .contentType("application/json")
                         .content("""
                                 {
-                                    "name": "Book F",
+                                    "name": "Book A",
                                       "author": {
                                         "id": 1,
                                         "firstName": "Author",
@@ -65,7 +64,7 @@ public class BookTests {
 
         this.mvc.perform(get(location))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Book F"));
+                .andExpect(jsonPath("$.name").value("Book A"));
     }
 
     @Test
@@ -97,7 +96,7 @@ public class BookTests {
     @Transactional
     @Rollback
     void shouldNotDeleteABook() throws Exception {
-        this.mvc.perform(delete("/api/v1/book/1"))
+        this.mvc.perform(delete("/api/v1/book/2"))
                 .andExpect(status().isForbidden());
     }
 
@@ -107,7 +106,7 @@ public class BookTests {
     @Rollback
     @WithMockUser(username = "Admin", authorities = "ADMIN")
     void shoulDeleteABookIfExists() throws Exception {
-        this.mvc.perform(delete("/api/v1/book/1"))
+        this.mvc.perform(delete("/api/v1/book/2"))
                 .andExpect(status().isNoContent());
     }
 
@@ -116,7 +115,7 @@ public class BookTests {
     @Transactional
     @Rollback
     void shouldNotUpdateABook() throws Exception {
-        this.mvc.perform(put("/api/v1/book/1")
+        this.mvc.perform(put("/api/v1/book/2")
                 .contentType("application/json")
                 .content("""
                         {
@@ -141,7 +140,7 @@ public class BookTests {
     @Rollback
     @WithMockUser(username = "Admim", authorities = "ADMIN")
     void shouldUpdateABookIfExists() throws Exception {
-        this.mvc.perform(put("/api/v1/book/1")
+        this.mvc.perform(put("/api/v1/book/2")
                 .contentType("application/json")
                 .content("""
                         {
@@ -165,7 +164,7 @@ public class BookTests {
     @Transactional
     @Rollback
     void shouldNotAddOwnerToABook() throws Exception {
-        this.mvc.perform(put("/api/v1/book/1/user/1"))
+        this.mvc.perform(put("/api/v1/book/2/user/1"))
                 .andExpect(status().isForbidden());
     }
 
@@ -175,7 +174,7 @@ public class BookTests {
     @Rollback
     @WithMockUser(username = "Admin", authorities = "ADMIN")
     void shouldAddOwnerToABook() throws Exception {
-        this.mvc.perform(put("/api/v1/book/1/user/1"))
+        this.mvc.perform(put("/api/v1/book/2/user/1"))
                 .andExpect(status().isNoContent());
     }
 }
